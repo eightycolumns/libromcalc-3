@@ -45,9 +45,11 @@ START_TEST(subtrahend_cannot_be_NULL) {
 
 int main(void) {
   TCase *null_pointer_error = tcase_create("Null Pointer Error");
+
   tcase_add_test(null_pointer_error, sum_cannot_by_NULL);
   tcase_add_test(null_pointer_error, augend_cannot_by_NULL);
   tcase_add_test(null_pointer_error, addend_cannot_by_NULL);
+
   tcase_add_test(null_pointer_error, difference_cannot_be_NULL);
   tcase_add_test(null_pointer_error, minuend_cannot_be_NULL);
   tcase_add_test(null_pointer_error, subtrahend_cannot_be_NULL);
