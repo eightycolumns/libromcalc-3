@@ -110,6 +110,12 @@ START_TEST(III_minus_I_is_II) {
   ck_assert_str_eq(expected, actual);
 } END_TEST
 
+START_TEST(II_minus_I_is_I) {
+  char expected[] = "I";
+  subtract(actual, "II", "I");
+  ck_assert_str_eq(expected, actual);
+} END_TEST
+
 int main(void) {
   TCase *null_pointer_error = tcase_create("Null Pointer Error");
 
@@ -138,6 +144,7 @@ int main(void) {
   tcase_add_test(subtraction, V_minus_I_is_IV);
   tcase_add_test(subtraction, IV_minus_I_is_III);
   tcase_add_test(subtraction, III_minus_I_is_II);
+  tcase_add_test(subtraction, II_minus_I_is_I);
 
   Suite *operations = suite_create("Operations");
   suite_add_tcase(operations, addition);
