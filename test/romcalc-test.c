@@ -6,6 +6,7 @@
 
 static char sum[ROMCALC_MAX_LENGTH];
 static char difference[ROMCALC_MAX_LENGTH];
+static char actual[ROMCALC_MAX_LENGTH];
 
 START_TEST(sum_cannot_by_NULL) {
   int expected = ROMCALC_NULL_POINTER_ERROR;
@@ -43,6 +44,12 @@ START_TEST(subtrahend_cannot_be_NULL) {
   ck_assert_int_eq(expected, actual);
 } END_TEST
 
+START_TEST(I_plus_I_is_II) {
+  char expected[] = "II";
+  add(actual, "I", "I");
+  ck_assert_str_eq(expected, actual);
+} END_TEST
+
 int main(void) {
   TCase *null_pointer_error = tcase_create("Null Pointer Error");
 
@@ -57,7 +64,14 @@ int main(void) {
   Suite *error_handling = suite_create("Error Handling");
   suite_add_tcase(error_handling, null_pointer_error);
 
+  TCase *addition = tcase_create("Addition");
+  tcase_add_test(addition, I_plus_I_is_II);
+
+  Suite *operations = suite_create("Operations");
+  suite_add_tcase(operations, addition);
+
   SRunner *srunner = srunner_create(error_handling);
+  srunner_add_suite(srunner, operations);
   srunner_run_all(srunner, CK_ENV);
   int ntests_failed = srunner_ntests_failed(srunner);
   srunner_free(srunner);
