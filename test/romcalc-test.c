@@ -6,6 +6,7 @@
 
 static char sum[ROMCALC_MAX_LENGTH];
 static char difference[ROMCALC_MAX_LENGTH];
+
 static char actual[ROMCALC_MAX_LENGTH];
 
 START_TEST(sum_cannot_by_NULL) {
@@ -131,6 +132,7 @@ int main(void) {
   suite_add_tcase(error_handling, null_pointer_error);
 
   TCase *addition = tcase_create("Addition");
+
   tcase_add_test(addition, I_plus_I_is_II);
   tcase_add_test(addition, II_plus_I_is_III);
   tcase_add_test(addition, III_plus_I_is_IV);
@@ -139,6 +141,7 @@ int main(void) {
   tcase_add_test(addition, IX_plus_I_is_X);
 
   TCase *subtraction = tcase_create("Subtraction");
+
   tcase_add_test(subtraction, X_minus_I_is_IX);
   tcase_add_test(subtraction, IX_minus_IV_is_V);
   tcase_add_test(subtraction, V_minus_I_is_IV);
@@ -147,11 +150,13 @@ int main(void) {
   tcase_add_test(subtraction, II_minus_I_is_I);
 
   Suite *operations = suite_create("Operations");
+
   suite_add_tcase(operations, addition);
   suite_add_tcase(operations, subtraction);
 
   SRunner *srunner = srunner_create(error_handling);
   srunner_add_suite(srunner, operations);
+
   srunner_run_all(srunner, CK_ENV);
   int ntests_failed = srunner_ntests_failed(srunner);
   srunner_free(srunner);
