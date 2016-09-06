@@ -11,7 +11,9 @@ int add(char *sum, const char *augend, const char *addend) {
     return ROMCALC_NULL_POINTER_ERROR;
   }
 
-  arabic_to_roman(sum, roman_to_arabic(augend) + roman_to_arabic(addend));
+  int result = roman_to_arabic(augend) + roman_to_arabic(addend);
+
+  arabic_to_roman(sum, result);
 
   return ROMCALC_SUCCESS;
 }
