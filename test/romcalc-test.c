@@ -164,14 +164,18 @@ TCase *subtraction(void) {
   return subtraction;
 }
 
-int main(void) {
+Suite *operations(void) {
   Suite *operations = suite_create("Operations");
 
   suite_add_tcase(operations, addition());
   suite_add_tcase(operations, subtraction());
 
+  return operations;
+}
+
+int main(void) {
   SRunner *srunner = srunner_create(error_handling());
-  srunner_add_suite(srunner, operations);
+  srunner_add_suite(srunner, operations());
 
   srunner_run_all(srunner, CK_ENV);
   int ntests_failed = srunner_ntests_failed(srunner);
