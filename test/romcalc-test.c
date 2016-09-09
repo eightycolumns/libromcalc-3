@@ -2,19 +2,8 @@
 
 #include <check.h>
 
-#include "src/romcalc.h"
 #include "test/error-handling.h"
-#include "test/addition.h"
-#include "test/subtraction.h"
-
-Suite *operations(void) {
-  Suite *operations = suite_create("Operations");
-
-  suite_add_tcase(operations, addition());
-  suite_add_tcase(operations, subtraction());
-
-  return operations;
-}
+#include "test/operations.h"
 
 int main(void) {
   SRunner *srunner = srunner_create(error_handling());
