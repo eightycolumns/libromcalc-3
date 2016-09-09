@@ -151,7 +151,7 @@ TCase *addition(void) {
   return addition;
 }
 
-int main(void) {
+TCase *subtraction(void) {
   TCase *subtraction = tcase_create("Subtraction");
 
   tcase_add_test(subtraction, X_minus_I_is_IX);
@@ -161,10 +161,14 @@ int main(void) {
   tcase_add_test(subtraction, III_minus_I_is_II);
   tcase_add_test(subtraction, II_minus_I_is_I);
 
+  return subtraction;
+}
+
+int main(void) {
   Suite *operations = suite_create("Operations");
 
   suite_add_tcase(operations, addition());
-  suite_add_tcase(operations, subtraction);
+  suite_add_tcase(operations, subtraction());
 
   SRunner *srunner = srunner_create(error_handling());
   srunner_add_suite(srunner, operations);
