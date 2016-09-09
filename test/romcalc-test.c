@@ -117,7 +117,7 @@ START_TEST(II_minus_I_is_I) {
   ck_assert_str_eq(expected, actual);
 } END_TEST
 
-int main(void) {
+TCase *null_pointer_error(void) {
   TCase *null_pointer_error = tcase_create("Null Pointer Error");
 
   tcase_add_test(null_pointer_error, sum_cannot_by_NULL);
@@ -128,8 +128,12 @@ int main(void) {
   tcase_add_test(null_pointer_error, minuend_cannot_be_NULL);
   tcase_add_test(null_pointer_error, subtrahend_cannot_be_NULL);
 
+  return null_pointer_error;
+}
+
+int main(void) {
   Suite *error_handling = suite_create("Error Handling");
-  suite_add_tcase(error_handling, null_pointer_error);
+  suite_add_tcase(error_handling, null_pointer_error());
 
   TCase *addition = tcase_create("Addition");
 
