@@ -3,7 +3,7 @@
 #include <check.h>
 
 #include "src/romcalc.h"
-#include "test/null-pointer-error.h"
+#include "test/error-handling.h"
 
 static char actual[ROMCALC_MAX_LENGTH];
 
@@ -78,13 +78,6 @@ START_TEST(II_minus_I_is_I) {
   subtract(actual, "II", "I");
   ck_assert_str_eq(expected, actual);
 } END_TEST
-
-Suite *error_handling(void) {
-  Suite *error_handling = suite_create("Error Handling");
-  suite_add_tcase(error_handling, null_pointer_error());
-
-  return error_handling;
-}
 
 TCase *addition(void) {
   TCase *addition = tcase_create("Addition");
