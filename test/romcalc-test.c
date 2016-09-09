@@ -131,10 +131,14 @@ TCase *null_pointer_error(void) {
   return null_pointer_error;
 }
 
-int main(void) {
+Suite *error_handling(void) {
   Suite *error_handling = suite_create("Error Handling");
   suite_add_tcase(error_handling, null_pointer_error());
 
+  return error_handling;
+}
+
+int main(void) {
   TCase *addition = tcase_create("Addition");
 
   tcase_add_test(addition, I_plus_I_is_II);
@@ -158,7 +162,7 @@ int main(void) {
   suite_add_tcase(operations, addition);
   suite_add_tcase(operations, subtraction);
 
-  SRunner *srunner = srunner_create(error_handling);
+  SRunner *srunner = srunner_create(error_handling());
   srunner_add_suite(srunner, operations);
 
   srunner_run_all(srunner, CK_ENV);
