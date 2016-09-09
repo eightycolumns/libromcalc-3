@@ -3,6 +3,23 @@
 #include <assert.h>
 #include <string.h>
 
+typedef struct {
+  char *key;
+  int value;
+} Numeral;
+
+static Numeral numerals[] = {
+  {"I", 1},
+  {"II", 2},
+  {"III", 3},
+  {"IV", 4},
+  {"V", 5},
+  {"IX", 9},
+  {"X", 10}
+};
+
+static size_t n_numerals = sizeof numerals / sizeof numerals[0];
+
 static int roman_to_arabic(const char *roman);
 static char *arabic_to_roman(char *roman, int arabic);
 
@@ -35,20 +52,10 @@ static int roman_to_arabic(const char *roman) {
 
   int arabic = 0;
 
-  if (strcmp("I", roman) == 0) {
-    arabic = 1;
-  } else if (strcmp("II", roman) == 0) {
-    arabic = 2;
-  } else if (strcmp("III", roman) == 0) {
-    arabic = 3;
-  } else if (strcmp("IV", roman) == 0) {
-    arabic = 4;
-  } else if (strcmp("V", roman) == 0) {
-    arabic = 5;
-  } else if (strcmp("IX", roman) == 0) {
-    arabic = 9;
-  } else if (strcmp("X", roman) == 0) {
-    arabic = 10;
+  for (size_t i = 0; i < n_numerals; i += 1) {
+    if (strcmp(roman, numerals[i].key) == 0) {
+      arabic = numerals[i].value;
+    }
   }
 
   return arabic;
@@ -57,20 +64,10 @@ static int roman_to_arabic(const char *roman) {
 static char *arabic_to_roman(char *roman, int arabic) {
   assert(roman != NULL);
 
-  if (arabic == 1) {
-    strcpy(roman, "I");
-  } else if (arabic == 2) {
-    strcpy(roman, "II");
-  } else if (arabic == 3) {
-    strcpy(roman, "III");
-  } else if (arabic == 4) {
-    strcpy(roman, "IV");
-  } else if (arabic == 5) {
-    strcpy(roman, "V");
-  } else if (arabic == 9) {
-    strcpy(roman, "IX");
-  } else if (arabic == 10) {
-    strcpy(roman, "X");
+  for (size_t i = 0; i < n_numerals; i += 1) {
+    if (arabic == numerals[i].value) {
+      strcpy(roman, numerals[i].key);
+    }
   }
 
   return roman;
