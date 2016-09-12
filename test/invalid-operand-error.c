@@ -90,6 +90,12 @@ START_TEST(VV_is_an_invalid_operand) {
   ck_assert_int_eq(expected, actual);
 } END_TEST
 
+START_TEST(LL_is_an_invalid_operand) {
+  int expected = ROMCALC_INVALID_OPERAND_ERROR;
+  int actual = add(sum, "LL", "I");
+  ck_assert_int_eq(expected, actual);
+} END_TEST
+
 TCase *invalid_operand_error(void) {
   TCase *invalid_operand_error = tcase_create("Invalid Operand Error");
 
@@ -111,6 +117,7 @@ TCase *invalid_operand_error(void) {
   tcase_add_test(invalid_operand_error, MMMM_is_an_invalid_operand);
 
   tcase_add_test(invalid_operand_error, VV_is_an_invalid_operand);
+  tcase_add_test(invalid_operand_error, LL_is_an_invalid_operand);
 
   return invalid_operand_error;
 }
