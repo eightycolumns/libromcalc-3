@@ -52,7 +52,8 @@ bool is_roman_numeral(const char *string) {
     if (
       (strcmp("I", current_substring) == 0 && repetition_counter > 3) ||
       (strcmp("X", current_substring) == 0 && repetition_counter > 3) ||
-      (strcmp("C", current_substring) == 0 && repetition_counter > 3)
+      (strcmp("C", current_substring) == 0 && repetition_counter > 3) ||
+      (strcmp("M", current_substring) == 0 && repetition_counter > 3)
     ) {
       return false;
     }
