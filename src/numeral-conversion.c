@@ -4,8 +4,7 @@
 #include <string.h>
 
 #include "src/numerals.h"
-
-static char *substring(char *dest, const char *src, size_t n);
+#include "src/strings.h"
 
 int roman_to_arabic(const char *roman) {
   assert(roman != NULL);
@@ -47,14 +46,4 @@ char *arabic_to_roman(char *roman, int arabic) {
   }
 
   return roman;
-}
-
-static char *substring(char *dest, const char *src, size_t n) {
-  assert(dest != NULL);
-  assert(src != NULL);
-
-  strncpy(dest, src, n);
-  dest[n] = '\0';
-
-  return dest;
 }
