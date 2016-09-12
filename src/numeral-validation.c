@@ -49,7 +49,10 @@ bool is_roman_numeral(const char *string) {
       repetition_counter = 1;
     }
 
-    if (strcmp("I", current_substring) == 0 && repetition_counter > 3) {
+    if (
+      (strcmp("I", current_substring) == 0 && repetition_counter > 3) ||
+      (strcmp("X", current_substring) == 0 && repetition_counter > 3)
+    ) {
       return false;
     }
   }
