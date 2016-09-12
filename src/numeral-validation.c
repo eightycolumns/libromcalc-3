@@ -13,6 +13,8 @@ bool is_roman_numeral(const char *string) {
   char previous_substring[3] = "";
   char current_substring[3] = "";
 
+  int repetition_counter = 1;
+
   size_t i = 0;
   size_t string_length = strlen(string);
 
@@ -38,6 +40,16 @@ bool is_roman_numeral(const char *string) {
     }
 
     if (value_of(previous_substring) < value_of(current_substring)) {
+      return false;
+    }
+
+    if (strcmp(previous_substring, current_substring) == 0) {
+      repetition_counter += 1;
+    } else {
+      repetition_counter = 1;
+    }
+
+    if (strcmp("I", current_substring) == 0 && repetition_counter > 3) {
       return false;
     }
   }
