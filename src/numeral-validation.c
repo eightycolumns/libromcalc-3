@@ -51,8 +51,14 @@ bool is_roman_numeral(const char *string) {
       repetition_counter = 1;
     }
 
-    if (is_repeatable(current_substring) && repetition_counter > 3) {
-      return false;
+    if (is_repeatable(current_substring)) {
+      if (repetition_counter > 3) {
+        return false;
+      }
+    } else {
+      if (repetition_counter > 1) {
+        return false;
+      }
     }
   }
 
