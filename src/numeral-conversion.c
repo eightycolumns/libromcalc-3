@@ -1,7 +1,6 @@
 #include "src/numeral-conversion.h"
 
 #include <assert.h>
-#include <stdbool.h>
 #include <string.h>
 
 typedef struct {
@@ -28,8 +27,6 @@ static Numeral numerals[] = {
 static size_t n_numerals = sizeof numerals / sizeof numerals[0];
 
 static char *substring(char *dest, const char *src, size_t n);
-static bool numerals_array_includes(const char *key);
-static Numeral *find_numeral_by(const char *key);
 static int value_of(const char *key);
 
 int roman_to_arabic(const char *roman) {
@@ -47,7 +44,7 @@ int roman_to_arabic(const char *roman) {
     char one_char_substring[2];
     substring(one_char_substring, &roman[i], 1);
 
-    if (numerals_array_includes(two_char_substring)) {
+    if (value_of(two_char_substring) > 0) {
       arabic += value_of(two_char_substring);
       i += 2;
     } else {
@@ -84,26 +81,14 @@ static char *substring(char *dest, const char *src, size_t n) {
   return dest;
 }
 
-static bool numerals_array_includes(const char *key) {
-  assert(key != NULL);
-  return find_numeral_by(key) != NULL;
-}
-
-static Numeral *find_numeral_by(const char *key) {
+static int value_of(const char *key) {
   assert(key != NULL);
 
   for (size_t i = 0; i < n_numerals; i += 1) {
     if (strcmp(key, numerals[i].key) == 0) {
-      return &numerals[i];
+      return numerals[i].value;
     }
   }
 
-  return NULL;
-}
-
-static int value_of(const char *key) {
-  assert(key != NULL);
-  assert(numerals_array_includes(key));
-
-  return find_numeral_by(key)->value;
+  return 0;
 }
