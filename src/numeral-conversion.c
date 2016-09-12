@@ -3,31 +3,9 @@
 #include <assert.h>
 #include <string.h>
 
-typedef struct {
-  char *key;
-  int value;
-} Numeral;
-
-static Numeral numerals[] = {
-  {"M", 1000},
-  {"CM", 900},
-  {"D", 500},
-  {"CD", 400},
-  {"C", 100},
-  {"XC", 90},
-  {"L", 50},
-  {"XL", 40},
-  {"X", 10},
-  {"IX", 9},
-  {"V", 5},
-  {"IV", 4},
-  {"I", 1},
-};
-
-static size_t n_numerals = sizeof numerals / sizeof numerals[0];
+#include "src/numerals.h"
 
 static char *substring(char *dest, const char *src, size_t n);
-static int value_of(const char *key);
 
 int roman_to_arabic(const char *roman) {
   assert(roman != NULL);
@@ -79,16 +57,4 @@ static char *substring(char *dest, const char *src, size_t n) {
   dest[n] = '\0';
 
   return dest;
-}
-
-static int value_of(const char *key) {
-  assert(key != NULL);
-
-  for (size_t i = 0; i < n_numerals; i += 1) {
-    if (strcmp(key, numerals[i].key) == 0) {
-      return numerals[i].value;
-    }
-  }
-
-  return 0;
 }
