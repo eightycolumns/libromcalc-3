@@ -74,6 +74,8 @@ static bool is_legal_order(const char *previous, const char *current) {
 }
 
 static bool is_repeatable(const char *substring) {
+  assert(substring != NULL);
+
   return (
     strcmp("I", substring) == 0 ||
     strcmp("X", substring) == 0 ||
