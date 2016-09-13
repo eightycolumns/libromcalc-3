@@ -39,6 +39,7 @@ int roman_to_arabic(const char *roman) {
 
 char *arabic_to_roman(char *roman, int arabic) {
   assert(roman != NULL);
+  assert(is_in_range(arabic));
 
   strcpy(roman, "");
 
