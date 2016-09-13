@@ -46,15 +46,15 @@ bool is_roman_numeral(const char *string) {
       return false;
     }
 
+    if (!is_legal_repetition(previous_substring, current_substring)) {
+      return false;
+    }
+
     if (strcmp("", previous_substring) == 0) {
       continue;
     }
 
     if (!is_legal_order(previous_substring, current_substring)) {
-      return false;
-    }
-
-    if (!is_legal_repetition(previous_substring, current_substring)) {
       return false;
     }
   }
@@ -78,7 +78,7 @@ static bool is_legal_repetition(const char *previous, const char *current) {
   assert(previous != NULL);
   assert(current != NULL);
 
-  static int counter = 1;
+  static int counter;
 
   if (strcmp(previous, current) == 0) {
     counter += 1;
