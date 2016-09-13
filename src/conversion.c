@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "src/numeral-validation.h"
+#include "src/validation.h"
 #include "src/numerals.h"
 #include "src/strings.h"
 

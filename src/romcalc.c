@@ -3,7 +3,7 @@
 #include <stddef.h>
 
 #include "src/conversion.h"
-#include "src/numeral-validation.h"
+#include "src/validation.h"
 
 int add(char *sum, const char *augend, const char *addend) {
   if (sum == NULL || augend == NULL || addend == NULL) {
