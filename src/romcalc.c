@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 
-#include "src/numeral-conversion.h"
+#include "src/conversion.h"
 #include "src/numeral-validation.h"
 
 int add(char *sum, const char *augend, const char *addend) {
