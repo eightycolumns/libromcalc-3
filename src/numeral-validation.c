@@ -32,9 +32,11 @@ bool is_roman_numeral(const char *string) {
     if (value_of(two_char_substring) > 0) {
       strcpy(current_substring, two_char_substring);
       i += 2;
-    } else {
+    } else if (value_of(one_char_substring) > 0) {
       strcpy(current_substring, one_char_substring);
       i += 1;
+    } else {
+      return false;
     }
 
     if (strcmp("", previous_substring) == 0) {
