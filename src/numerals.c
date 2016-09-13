@@ -16,7 +16,7 @@ Numeral numerals[] = {
   {"IX", 9},
   {"V", 5},
   {"IV", 4},
-  {"I", 1},
+  {"I", 1}
 };
 
 size_t n_numerals = sizeof numerals / sizeof numerals[0];
