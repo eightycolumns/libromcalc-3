@@ -14,6 +14,10 @@ static bool is_repeatable(const char *substring);
 bool is_roman_numeral(const char *string) {
   assert(string != NULL);
 
+  if (strcmp("", string) == 0) {
+    return false;
+  }
+
   char previous_substring[3] = "";
   char current_substring[3] = "";
 
