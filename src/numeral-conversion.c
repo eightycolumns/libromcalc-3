@@ -3,11 +3,13 @@
 #include <assert.h>
 #include <string.h>
 
+#include "src/numeral-validation.h"
 #include "src/numerals.h"
 #include "src/strings.h"
 
 int roman_to_arabic(const char *roman) {
   assert(roman != NULL);
+  assert(is_roman_numeral(roman));
 
   int arabic = 0;
 
