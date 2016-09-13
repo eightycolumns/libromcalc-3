@@ -8,6 +8,7 @@
 #include "src/strings.h"
 
 static bool is_legal_order(const char *previous, const char *current);
+static bool is_legal_repetition(const char *previous, const char *current);
 static bool is_repeatable(const char *substring);
 
 bool is_roman_numeral(const char *string) {
@@ -16,19 +17,17 @@ bool is_roman_numeral(const char *string) {
   char previous_substring[3] = "";
   char current_substring[3] = "";
 
-  int repetition_counter = 1;
-
   size_t i = 0;
   size_t string_length = strlen(string);
 
   while (i < string_length) {
+    strcpy(previous_substring, current_substring);
+
     char two_char_substring[3];
     substring(two_char_substring, &string[i], 2);
 
     char one_char_substring[2];
     substring(one_char_substring, &string[i], 1);
-
-    strcpy(previous_substring, current_substring);
 
     if (value_of(two_char_substring) > 0) {
       strcpy(current_substring, two_char_substring);
@@ -46,20 +45,8 @@ bool is_roman_numeral(const char *string) {
       return false;
     }
 
-    if (strcmp(previous_substring, current_substring) == 0) {
-      repetition_counter += 1;
-    } else {
-      repetition_counter = 1;
-    }
-
-    if (is_repeatable(current_substring)) {
-      if (repetition_counter > 3) {
-        return false;
-      }
-    } else {
-      if (repetition_counter > 1) {
-        return false;
-      }
+    if (!is_legal_repetition(previous_substring, current_substring)) {
+      return false;
     }
   }
 
@@ -71,6 +58,23 @@ static bool is_legal_order(const char *previous, const char *current) {
   assert(current != NULL);
 
   return value_of(previous) >= value_of(current);
+}
+
+static bool is_legal_repetition(const char *previous, const char *current) {
+  assert(previous != NULL);
+  assert(current != NULL);
+
+  static int counter = 1;
+
+  if (strcmp(previous, current) == 0) {
+    counter += 1;
+  } else {
+    counter = 1;
+  }
+
+  int limit = is_repeatable(current) ? 3 : 1;
+
+  return counter <= limit;
 }
 
 static bool is_repeatable(const char *substring) {
