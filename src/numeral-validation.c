@@ -7,6 +7,7 @@
 #include "src/numerals.h"
 #include "src/strings.h"
 
+static bool is_empty_string(const char *string);
 static bool is_legal_order(const char *previous, const char *current);
 static bool is_legal_repetition(const char *previous, const char *current);
 static bool is_repeatable(const char *substring);
@@ -14,7 +15,7 @@ static bool is_repeatable(const char *substring);
 bool is_roman_numeral(const char *string) {
   assert(string != NULL);
 
-  if (strcmp("", string) == 0) {
+  if (is_empty_string(string)) {
     return false;
   }
 
@@ -57,6 +58,11 @@ bool is_roman_numeral(const char *string) {
   }
 
   return true;
+}
+
+static bool is_empty_string(const char *string) {
+  assert(string != NULL);
+  return strcmp("", string) == 0;
 }
 
 static bool is_legal_order(const char *previous, const char *current) {
