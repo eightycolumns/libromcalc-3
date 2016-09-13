@@ -50,10 +50,6 @@ bool is_roman_numeral(const char *string) {
       return false;
     }
 
-    if (strcmp("", previous_substring) == 0) {
-      continue;
-    }
-
     if (!is_legal_order(previous_substring, current_substring)) {
       return false;
     }
@@ -70,6 +66,10 @@ static bool is_empty_string(const char *string) {
 static bool is_legal_order(const char *previous, const char *current) {
   assert(previous != NULL);
   assert(current != NULL);
+
+  if (strcmp("", previous) == 0) {
+    return true;
+  }
 
   return value_of(previous) >= value_of(current);
 }
