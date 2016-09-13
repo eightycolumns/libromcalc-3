@@ -7,6 +7,7 @@
 #include "src/numerals.h"
 #include "src/strings.h"
 
+static bool is_legal_order(const char *previous, const char *current);
 static bool is_repeatable(const char *substring);
 
 bool is_roman_numeral(const char *string) {
@@ -41,7 +42,7 @@ bool is_roman_numeral(const char *string) {
       continue;
     }
 
-    if (value_of(previous_substring) < value_of(current_substring)) {
+    if (!is_legal_order(previous_substring, current_substring)) {
       return false;
     }
 
@@ -63,6 +64,13 @@ bool is_roman_numeral(const char *string) {
   }
 
   return true;
+}
+
+static bool is_legal_order(const char *previous, const char *current) {
+  assert(previous != NULL);
+  assert(current != NULL);
+
+  return value_of(previous) >= value_of(current);
 }
 
 static bool is_repeatable(const char *substring) {
