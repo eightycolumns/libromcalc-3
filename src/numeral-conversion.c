@@ -17,9 +17,11 @@ int roman_to_arabic(const char *roman) {
   while (i < roman_length) {
     char two_char_substring[3];
     substring(two_char_substring, &roman[i], 2);
+    to_uppercase(two_char_substring);
 
     char one_char_substring[2];
     substring(one_char_substring, &roman[i], 1);
+    to_uppercase(one_char_substring);
 
     if (value_of(two_char_substring) > 0) {
       arabic += value_of(two_char_substring);
