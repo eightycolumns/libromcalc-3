@@ -8,6 +8,7 @@
 #include "src/strings.h"
 
 static bool is_empty_string(const char *string);
+static bool illegal_characters(const char *substring);
 static bool is_legal_order(const char *previous, const char *current);
 static bool is_legal_repetition(const char *previous, const char *current);
 static bool is_repeatable(const char *substring);
@@ -39,18 +40,20 @@ bool is_roman_numeral(const char *string) {
     if (value_of(two_char_substring) > 0) {
       strcpy(current_substring, two_char_substring);
       i += 2;
-    } else if (value_of(one_char_substring) > 0) {
+    } else {
       strcpy(current_substring, one_char_substring);
       i += 1;
-    } else {
-      return false;
     }
 
-    if (!is_legal_repetition(previous_substring, current_substring)) {
+    if (illegal_characters(current_substring)) {
       return false;
     }
 
     if (!is_legal_order(previous_substring, current_substring)) {
+      return false;
+    }
+
+    if (!is_legal_repetition(previous_substring, current_substring)) {
       return false;
     }
   }
@@ -61,6 +64,11 @@ bool is_roman_numeral(const char *string) {
 static bool is_empty_string(const char *string) {
   assert(string != NULL);
   return strcmp("", string) == 0;
+}
+
+static bool illegal_characters(const char *substring) {
+  assert(substring != NULL);
+  return value_of(substring) == 0;
 }
 
 static bool is_legal_order(const char *previous, const char *current) {
