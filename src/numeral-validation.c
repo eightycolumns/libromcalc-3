@@ -9,7 +9,7 @@
 
 static bool is_empty_string(const char *string);
 static bool illegal_characters(const char *substring);
-static bool is_legal_order(const char *previous, const char *current);
+static bool illegal_order(const char *previous, const char *current);
 static bool is_legal_repetition(const char *previous, const char *current);
 static bool is_repeatable(const char *substring);
 
@@ -49,7 +49,7 @@ bool is_roman_numeral(const char *string) {
       return false;
     }
 
-    if (!is_legal_order(previous_substring, current_substring)) {
+    if (illegal_order(previous_substring, current_substring)) {
       return false;
     }
 
@@ -71,15 +71,15 @@ static bool illegal_characters(const char *substring) {
   return value_of(substring) == 0;
 }
 
-static bool is_legal_order(const char *previous, const char *current) {
+static bool illegal_order(const char *previous, const char *current) {
   assert(previous != NULL);
   assert(current != NULL);
 
   if (strcmp("", previous) == 0) {
-    return true;
+    return false;
   }
 
-  return value_of(previous) >= value_of(current);
+  return value_of(previous) < value_of(current);
 }
 
 static bool is_legal_repetition(const char *previous, const char *current) {
