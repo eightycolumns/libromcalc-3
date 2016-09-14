@@ -8,7 +8,6 @@
 #include "src/numerals.h"
 #include "src/strings.h"
 
-static bool is_empty_string(const char *string);
 static bool is_mixed_case(const char *string);
 static bool includes_lowercase(const char *string);
 static bool includes_uppercase(const char *string);
@@ -71,11 +70,6 @@ bool is_roman_numeral(const char *string) {
 
 bool is_in_range(int arabic_numeral) {
   return arabic_numeral > 0 && arabic_numeral < 4000;
-}
-
-static bool is_empty_string(const char *string) {
-  assert(string != NULL);
-  return strcmp("", string) == 0;
 }
 
 static bool is_mixed_case(const char *string) {

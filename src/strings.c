@@ -2,7 +2,13 @@
 
 #include <assert.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include <string.h>
+
+bool is_empty_string(const char *string) {
+  assert(string != NULL);
+  return strcmp("", string) == 0;
+}
 
 char *substring(char *dest, const char *src, size_t n) {
   assert(dest != NULL);
