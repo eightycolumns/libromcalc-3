@@ -5,6 +5,7 @@
 #include <stddef.h>
 
 bool is_empty_string(const char *string);
+bool is_mixed_case(const char *string);
 char *substring(char *dest, const char *src, size_t n);
 char *to_uppercase(char *string);
 

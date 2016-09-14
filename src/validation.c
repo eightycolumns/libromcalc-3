@@ -1,16 +1,12 @@
 #include "src/validation.h"
 
 #include <assert.h>
-#include <ctype.h>
 #include <stdbool.h>
 #include <string.h>
 
 #include "src/numerals.h"
 #include "src/strings.h"
 
-static bool is_mixed_case(const char *string);
-static bool includes_lowercase(const char *string);
-static bool includes_uppercase(const char *string);
 static bool illegal_characters(const char *substring);
 static bool illegal_order(const char *previous, const char *current);
 static bool illegal_repetition(const char *previous, const char *current);
@@ -70,39 +66,6 @@ bool is_roman_numeral(const char *string) {
 
 bool is_in_range(int arabic_numeral) {
   return arabic_numeral > 0 && arabic_numeral < 4000;
-}
-
-static bool is_mixed_case(const char *string) {
-  assert(string != NULL);
-  return includes_lowercase(string) && includes_uppercase(string);
-}
-
-static bool includes_lowercase(const char *string) {
-  assert(string != NULL);
-
-  size_t string_length = strlen(string);
-
-  for (size_t i = 0; i < string_length; i += 1) {
-    if (islower(string[i])) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-static bool includes_uppercase(const char *string) {
-  assert(string != NULL);
-
-  size_t string_length = strlen(string);
-
-  for (size_t i = 0; i < string_length; i += 1) {
-    if (isupper(string[i])) {
-      return true;
-    }
-  }
-
-  return false;
 }
 
 static bool illegal_characters(const char *substring) {
