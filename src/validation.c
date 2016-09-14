@@ -96,9 +96,7 @@ static bool illegal_repetition(const char *previous, const char *current) {
     counter = 1;
   }
 
-  int limit = is_repeatable(current) ? 3 : 1;
-
-  return counter > limit;
+  return counter > (is_repeatable(current) ? 3 : 1);
 }
 
 static bool is_repeatable(const char *substring) {
